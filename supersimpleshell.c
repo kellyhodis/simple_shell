@@ -1,6 +1,6 @@
 #include "holberton.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
 	char *buffer = NULL, *token;
 	char *command[15];
@@ -8,6 +8,7 @@ int main(void)
 	int i = 0, status;
 	pid_t child_pid;
 
+	(void)argc;
 	while (1)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 9);
@@ -26,6 +27,7 @@ int main(void)
 		if (child_pid == 0)
 		{
 			execve(command[0], command, NULL);
+			perror(argv[0]);
 			exit(0);
 		}
 		waitpid(child_pid, &status, 0);
