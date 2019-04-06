@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv)
 {
-	char *buffer = NULL, *token;
+	char *buffer = NULL, *token1, *token2;
 	char *command[15];
 	size_t size = 1024;
 	int i = 0, status;
@@ -11,21 +11,22 @@ int main(int argc, char **argv)
 	(void)argc;
 	while (1)
 	{
-		write(STDOUT_FILENO, "#cisfun$ ", 9);
-		getline(&buffer, &size, stdin);
-
-		token = strtok(buffer, "\n");
-		while (token != NULL)
-		{
-			command[i] = strdup(token);
-			i++;
-			token = strtok(NULL, "\n");
-		}
-		command[i] = NULL;
-
 		child_pid = fork();
 		if (child_pid == 0)
 		{
+			write(STDOUT_FILENO, "#cisfun$ ", 9);
+			getline(&buffer, &size, stdin);
+
+			token1 = strtok(buffer, "\n");
+			token2 = strtok(token1, " ");
+			while (token2 != NULL)
+                	{
+	                        command[i] = strdup(token2);
+        	                i++;
+                	        token2 = strtok(NULL, "\n");
+                	}
+                	command[i] = NULL;
+
 			execve(command[0], command, NULL);
 			perror(argv[0]);
 			exit(0);
