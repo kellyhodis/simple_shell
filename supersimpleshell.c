@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 		{
 			command[i] = strdup(token2);
         		i++;
-        		token2 = strtok(NULL, "\n");
+        		token2 = strtok(NULL, " ");
         	}
         	command[i] = NULL;
 		
