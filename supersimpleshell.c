@@ -12,12 +12,11 @@ int main(void)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 9);
 		getline(&buffer, &size, stdin);
-	
+
 		token = strtok(buffer, "\n");
 		while (token != NULL)
 		{
 			command[i] = strdup(token);
-			printf("%s\n", command[i]);
 			i++;
 			token = strtok(NULL, "\n");
 		}
