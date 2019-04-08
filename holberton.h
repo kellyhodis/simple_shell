@@ -1,5 +1,6 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
+
 #include <unistd.h>
 #include <sys/types.h>
 #include <signal.h>
@@ -26,4 +27,6 @@ char *search_path(char *str);
 /* size_t **directory(dir_s **head, char **envp, mem_t *some);*/
 /* size_t *add_nodedir_end(dir_t **head, const char *dir);*/
 
-#endif 
+
+#endif /* HOLBERTON_H */
+
