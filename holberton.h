@@ -11,7 +11,6 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 #include <sys/resource.h>
-#include <sys/resource.h>
 #include <errno.h>
 
 struct dir_s
