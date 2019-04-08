@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 	char *buffer = NULL, *token1, *token2;
 	char *command[15];
 	size_t size = 1024;
-	int i = 0, status;
+	int i = 0, status, getEOF = 0;
 	pid_t child_pid;
 	int on = 1, flag = 1;
 
@@ -19,7 +19,9 @@ int main(int argc, char **argv)
 	while (on)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 9);
-		getline(&buffer, &size, stdin);
+		getEOF = getline(&buffer, &size, stdin);
+		if (getEOF == -1)
+			break;
 		token1 = strtok(buffer, "\n");
 		token2 = strtok(token1, " ");
 		while (token2 != NULL)
