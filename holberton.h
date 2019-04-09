@@ -1,32 +1,32 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
 
-/**
- * struct list_s - singly linked list
- * @str: string - (malloc'ed string)
- * @len: length of the string
- * @next: points to the next node
- *
- * Description: singly linked list node structure
- * for Holberton project
- */
-typedef struct list_s
-{
-    char *str;
-    struct list_s *next;
-} list_t;
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <dirent.h>
 #include <string.h>
+#include <sys/wait.h>
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <errno.h>
+#include <unistd.h>
 
-list_t *add_node_end(list_t **head, const char *str);
+struct dir_s
+{
+	char *dir;
+	struct dir_s *next;
+}dir_s;
+
+char *_strncat(char *dest, char *src, int n);
+char *search_path(char *str);
 char *_getenv(const char *name);
-int _setenv(const char *name, const char *value, int overwrite);
-int _unsetenv(const char *name);
+/* size_t **directory(dir_s **head, char **envp, mem_t *some);*/
+/* size_t *add_nodedir_end(dir_t **head, const char *dir);*/
+
 
 #endif /* HOLBERTON_H */
+
