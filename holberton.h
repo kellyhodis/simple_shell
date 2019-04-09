@@ -1,5 +1,7 @@
 #ifndef HOLBERTON_H
 #define HOLBERTON_H
+
+#include <unistd.h>
 #include <sys/types.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -12,6 +14,7 @@
 #include <sys/resource.h>
 #include <errno.h>
 #include <unistd.h>
+
 struct dir_s
 {
 	char *dir;
