@@ -15,7 +15,7 @@
 #include <errno.h>
 #include <unistd.h>
 
-struct dir_s
+typedef struct dir_s
 {
 	char *dir;
 	struct dir_s *next;
@@ -26,4 +26,5 @@ char *search_path(char *str);
 char *_getenv(const char *name);
 int _strcmp(char *s1, char *s2);
 void _env(char **environ);
+int _atoi(char *str);
 #endif 

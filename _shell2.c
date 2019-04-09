@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **envp)
 			{
 				if (command[1] != NULL)
 					{
-						exitcode = atoi(command[1]);
+						exitcode = _atoi(command[1]);
 						exit(exitcode);
 					}
 					break;

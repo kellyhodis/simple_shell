@@ -18,7 +18,7 @@ char *search_path(char *str)
 	char *dir_slash;
 	char *mybuf;
 	char *cat = NULL ; 
-	char *forest = getenv("PATH"); 
+	char *forest = _getenv("PATH"); 
 
 /*allocated space for node type directory and tokenized */
         head = malloc(sizeof(struct dir_s));
