@@ -8,7 +8,7 @@ int main(int argc, char **argv)
 	int i = 0, status, getEOF = 0;
 	pid_t child_pid;
 	int on = 1, flag = 1;
-	char *pathcom = NULL;
+	struct stat st;
 	(void)argc;
 
 	if (!(isatty(fileno(stdin))))
@@ -31,12 +31,13 @@ int main(int argc, char **argv)
         		token2 = strtok(NULL, " ");
         	}
         	command[i] = NULL;
-		pathcom = search_path(command[0]);
+		if (stat(command[0], &st)!= 0)
+			command[0] = search_path(command[0]);
 				
 		child_pid = fork();
 		if (child_pid == 0)
 		{
-			execve(pathcom, command, NULL);
+			execve(command[0], command, NULL);
 			perror(argv[0]);
 			exit(0);
 		}
