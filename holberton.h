@@ -24,9 +24,6 @@ struct dir_s
 char *_strncat(char *dest, char *src, int n);
 char *search_path(char *str);
 char *_getenv(const char *name);
-/* size_t **directory(dir_s **head, char **envp, mem_t *some);*/
-/* size_t *add_nodedir_end(dir_t **head, const char *dir);*/
-
-
-#endif /* HOLBERTON_H */
-
+int _strcmp(char *s1, char *s2);
+void _env(char **environ);
+#endif 
