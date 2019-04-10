@@ -10,59 +10,49 @@ char *search_path(char *str)
         struct dir_s *prev;
         struct dir_s *trav;
 	struct stat st;
+	/*size_t size = 0;*/
+	int n = 50;
 	/*char *command = NULL;*/
 /*	char *ptr[15];*/
 	int leng;
-	char *dir_slash = NULL;
-	char *mybuf = NULL;
-	char *cat = NULL; 
-	char *forest = NULL;
- 
-	head = _calloc(1, sizeof(struct dir_s));
-/*	printf("%d\n", _setenv("PATH", ":/usr/bin:/bin",1)); */
-	forest = malloc(strlen(_getenv("PATH") + 1));
-  	forest[0] = '\0';
-	forest = _getenv("PATH");
-	printf("%s\n",forest); 
+	char *dir_slash;
+	char *mybuf;
+	char *cat = NULL ; 
+	char *forest = _getenv("PATH"); 
+
 /*allocated space for node type directory and tokenized */
+        head = malloc(sizeof(struct dir_s));
         if (head == NULL)
                 return (NULL);
-		
 		mybuf = strtok(forest, ":");
-		head->dir = _calloc(1, strlen(mybuf) + 1);
- 	        head->dir = strdup(mybuf);       
-		prev = head;
-		
+ 	       head->dir = mybuf;       
+	prev = head;
+
         while (mybuf)
         {
-   		curr =_calloc(1, sizeof(struct dir_s));
-                printf("%s\n", mybuf);
-		if (curr == NULL)
+                curr = malloc(sizeof(struct dir_s));
+                if (curr == NULL)
                 return (NULL);
-		curr->dir = _calloc(1, strlen(mybuf) + 1);
-                curr->dir = strdup(mybuf);
+                curr->dir = mybuf;
 		prev->next = curr;
                 prev = curr;
-	
+		
                mybuf = strtok(NULL, ":"); 
         }
         trav = head;
 	while (trav!= NULL)
 	{
+
 		for(leng = 0;trav->dir[leng]; leng++);
-	
-	dir_slash = malloc(strlen(trav->dir) + 2);
+        dir_slash = malloc(leng + 1);
         if (dir_slash == NULL)
                 return (NULL);
-        dir_slash[0] = '\0';
-
+        
         for(leng = 0;trav->dir[leng]; leng++)
                 dir_slash[leng] = trav->dir[leng];
         dir_slash[leng] = '/';
         dir_slash[leng+1] = '\0';
-		cat = malloc(strlen(dir_slash) + strlen(str) + 13);
-		cat[0]= '\0';
-		cat = strcat(dir_slash,str);
+		cat =_strncat(dir_slash,str, n);
 		if (stat(cat, &st)== 0)
 			return(cat);
 	trav = trav->next;
