@@ -22,9 +22,11 @@ typedef struct dir_s
 }dir_s;
 
 char *_strncat(char *dest, char *src, int n);
+void *_calloc(unsigned int nmemb, unsigned int size);
 char *search_path(char *str);
 char *_getenv(const char *name);
 int _strcmp(char *s1, char *s2);
 void _env(char **environ);
 int _atoi(char *str);
+int _setenv(const char *name, const char *value, int overwrite);
 #endif 
