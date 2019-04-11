@@ -21,6 +21,7 @@ typedef struct dir_s
 	struct dir_s *next;
 }dir_s;
 
+int piped_in(char *lines[], char *buffer);
 char *_strncat(char *dest, char *src, int n);
 void *_calloc(unsigned int nmemb, unsigned int size);
 char *search_path(char *str);

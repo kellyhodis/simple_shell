@@ -2,6 +2,7 @@
 
 int main(int argc, char **argv, char **envp)
 {
+
 	char *buffer = NULL, *token1, *token2;
 	char *command[15], *lines[15];
 	size_t size = 1024;
@@ -15,28 +16,15 @@ int main(int argc, char **argv, char **envp)
 	if (buffer == NULL)
 		return ('\0');
 	if (!(isatty(fileno(stdin))))
-	{
-		read(STDIN_FILENO, buffer, size);
-		printf("%s\n", buffer);
-		flag = 0;
-	lines[j] = strtok(buffer, "\n");
-	/* delimiter by line */
-       		 while (lines[j])
-        	{
-                	printf("%s\n", lines[j]);
-                	j++;
-                	lines[j] = strtok(NULL, "\n");
-        	}
-        	j = 0;
+		flag = piped_in(lines, buffer);
 
-	}	
+	j = 0;
 	write(STDOUT_FILENO, "#cisfun$ ", 9);
 	while (on)
 	{
 		if (flag !=0)
 		{
 			getEOF = getline(&buffer, &size, stdin);
-			printf("%s\n", buffer);
 			if (getEOF == -1)
 				break;
 			lines[j] = "";
