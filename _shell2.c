@@ -2,7 +2,6 @@
 
 int main(int argc, char **argv, char **envp)
 {
-
 	char *buffer = NULL, *token1, *token2;
 	char *command[15], *lines[15];
 	size_t size = 1024;
@@ -12,19 +11,32 @@ int main(int argc, char **argv, char **envp)
 	struct stat st;
 	(void)argc;
 	
-	buffer = _calloc(1, size);
+	buffer = malloc(size);
 	if (buffer == NULL)
 		return ('\0');
 	if (!(isatty(fileno(stdin))))
-		flag = piped_in(lines, buffer);
-	printf("buffer: %s\n", buffer);
-	j = 0;
+	{
+		read(STDIN_FILENO, buffer, size);
+		printf("%s\n", buffer);
+		flag = 0;
+		lines[j] = strtok(buffer, "\n");
+		/* delimiter by line */
+       		 while (lines[j])
+        	{
+                	printf("%s\n", lines[j]);
+                	j++;
+                	lines[j] = strtok(NULL, "\n");
+        	}
+        	j = 0;
+
+	}	
 	write(STDOUT_FILENO, "#cisfun$ ", 9);
 	while (on)
 	{
 		if (flag !=0)
 		{
 			getEOF = getline(&buffer, &size, stdin);
+			printf("%s\n", buffer);
 			if (getEOF == -1)
 				break;
 			lines[j] = "";
@@ -34,67 +46,59 @@ int main(int argc, char **argv, char **envp)
 				lines[j + 1] = NULL;
 			}
 		}
-	while(lines[j])
-	{
-		if (flag != 0)
+		while(lines[j])
 		{
-			token1 = strtok(lines[j], "\n");
-		}
-		else	
-			token1 = strtok(lines[j], "\0");
-		token2 = strtok(token1," ");
-		while (token2 != NULL)
-		{
-			command[i] = strdup(token2);
-        		i++;
-        		token2 = strtok(NULL, " ");
-        	}
-        	command[i] = NULL;
-		if (_strcmp(command[0], "exit")== 0)
-		{
-			if (command[1] != NULL)
+			if (flag != 0)
 			{
-				exitcode = _atoi(command[1]);
-				exit(exitcode);
+				token1 = strtok(lines[j], "\n");
 			}
-			break;
-		}
-		if (_strcmp(command[0], "env") == 0)
-		{
-			flag_1 = 0;	
-			_env(envp);
-		}
-		/*_setenv("PATH", ": test: church: /bin/ls", 1);*/			
-		if (stat(command[0], &st)!= 0)
-			command[0] = search_path(command[0]);
-		if (flag_1)
-		{	
-			child_pid = fork();
-			if (child_pid == 0)
+			else	
+				token1 = strtok(lines[j], "\0");
+			token2 = strtok(token1," ");
+			while (token2 != NULL)
 			{
-				execve(command[0], command, NULL);
-				perror(argv[0]);
-				exit(0);
+				command[i] = strdup(token2);
+       		 		i++;
+        			token2 = strtok(NULL, " ");
+        		}
+        		command[i] = NULL;
+			if (_strcmp(command[0], "exit")== 0)
+			{
+				if (command[1] != NULL)
+				{
+					exitcode = _atoi(command[1]);
+					exit(exitcode);
+				}
+				break;
 			}
-			waitpid(child_pid, &status, 0);
+			if (_strcmp(command[0], "env") == 0)
+			{
+				flag_1 = 0;	
+				_env(envp);
+			}
+			/*_setenv("PATH", ": test: church: /bin/ls", 1);*/			
+			if (stat(command[0], &st)!= 0)
+				command[0] = search_path(command[0]);
+			if (flag_1)
+			{	
+				child_pid = fork();
+				if (child_pid == 0)
+				{
+					execve(command[0], command, NULL);
+					perror(argv[0]);
+					exit(0);
+				}
+					waitpid(child_pid, &status, 0);
+			}
+			j++;
+			i = 0;
+			flag_1 = 1;
 		}
-		j++;
-		i = 0;
-		flag_1 = 1;
-	}
 		j = 0;
 		buffer = NULL;
 		if (flag == 0)
 			on = 0;
 		write(STDOUT_FILENO, "#cisfun$ ", 9);
-		while (command[i])
-		{
-			free(command[i]);
-			i++;
-		}
-		i = 0;
-		free(buffer);
 	}
-	free(command);
 	return (0);	
 }
