@@ -12,12 +12,12 @@ int main(int argc, char **argv, char **envp)
 	struct stat st;
 	(void)argc;
 	
-	buffer = malloc(size);
+	buffer = _calloc(1, size);
 	if (buffer == NULL)
 		return ('\0');
 	if (!(isatty(fileno(stdin))))
 		flag = piped_in(lines, buffer);
-
+	printf("buffer: %s\n", buffer);
 	j = 0;
 	write(STDOUT_FILENO, "#cisfun$ ", 9);
 	while (on)
@@ -51,42 +51,50 @@ int main(int argc, char **argv, char **envp)
         	}
         	command[i] = NULL;
 		if (_strcmp(command[0], "exit")== 0)
+		{
+			if (command[1] != NULL)
 			{
-				if (command[1] != NULL)
-					{
-						exitcode = _atoi(command[1]);
-						exit(exitcode);
-					}
-					break;
+				exitcode = _atoi(command[1]);
+				exit(exitcode);
 			}
+			break;
+		}
 		if (_strcmp(command[0], "env") == 0)
-			{
-				flag_1 = 0;	
-				_env(envp);
-			}
-	/*_setenv("PATH", ": test: church: /bin/ls", 1);*/			
+		{
+			flag_1 = 0;	
+			_env(envp);
+		}
+		/*_setenv("PATH", ": test: church: /bin/ls", 1);*/			
 		if (stat(command[0], &st)!= 0)
 			command[0] = search_path(command[0]);
-			if (flag_1)
-			{	
-				child_pid = fork();
-				if (child_pid == 0)
-				{
-					execve(command[0], command, NULL);
-					perror(argv[0]);
-					exit(0);
-				}
-					waitpid(child_pid, &status, 0);
+		if (flag_1)
+		{	
+			child_pid = fork();
+			if (child_pid == 0)
+			{
+				execve(command[0], command, NULL);
+				perror(argv[0]);
+				exit(0);
 			}
-			j++;
-			i = 0;
-			flag_1 = 1;
+			waitpid(child_pid, &status, 0);
 		}
-			j = 0;
-			buffer = NULL;
-			if (flag == 0)
-				on = 0;
-	write(STDOUT_FILENO, "#cisfun$ ", 9);
+		j++;
+		i = 0;
+		flag_1 = 1;
 	}
+		j = 0;
+		buffer = NULL;
+		if (flag == 0)
+			on = 0;
+		write(STDOUT_FILENO, "#cisfun$ ", 9);
+		while (command[i])
+		{
+			free(command[i]);
+			i++;
+		}
+		i = 0;
+		free(buffer);
+	}
+	free(command);
 	return (0);	
 }
