@@ -24,7 +24,7 @@ typedef struct dir_s
 void free_array_of_str(char *arr[]);
 void word_token(char *command[], char *str);
 int env_check(char *command, char **env);
-int check_exit(char *command[]);
+void check_exit(char *command[]);
 void reset(int *i, int *j, int *env_print);
 void execute(char *command, char *arguments[], char **envp, char **argv);
 int piped_in(char *lines[], char *buffer);

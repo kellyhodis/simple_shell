@@ -44,8 +44,7 @@ int main(int argc, char **argv, char **envp)
 		while(lines[j])
 		{
 			word_token(command, lines[j]);
-			if (check_exit(command) == -1)
-				break; 
+			check_exit(command);
 			execute_on = env_check(command[0], envp);		
 			if (stat(command[0], &st)!= 0)
 				command[0] = search_path(command[0]);
