@@ -11,7 +11,7 @@
 
 int main(int argc, char **argv, char **envp)
 {
-	char *buffer = NULL, *token1;
+	char *buffer = NULL, *oneline;
 	char *command[15], *lines[15];
 	size_t size = 1024;
 	int i = 0, getEOF = 0, j = 0;
@@ -36,8 +36,8 @@ int main(int argc, char **argv, char **envp)
 			getEOF = getline(&buffer, &size, stdin);
 			if (getEOF == -1)
 				break;
-			token1 = strtok(buffer, "\n");
-			lines[j] = strdup(token1); 
+			oneline = strtok(buffer, "\n");
+			lines[j] = strdup(oneline); 
 			lines[j + 1] = NULL;
 
 		}
