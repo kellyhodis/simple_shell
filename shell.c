@@ -51,8 +51,7 @@ int main(int argc, char **argv, char **envp)
 			if (execute_on)
 				execute(command[0], command, NULL, argv);	
 			j++;
-			i = 0;
-			execute_on = 1;
+			reset(&i, 0, &execute_on);
 		}
 		/* if input was piped, do not repeat the loop */
 		if (!terminal)
