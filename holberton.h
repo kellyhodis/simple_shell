@@ -26,7 +26,7 @@ void word_token(char *command[], char *str);
 int env_check(char *command, char **env);
 void check_exit(char *command[]);
 void reset(int *i, int *j, int *env_print);
-void execute(char *command, char *arguments[], char **envp, char **argv);
+void execute(char *command[], char **envp, char **argv);
 int piped_in(char *lines[], char *buffer);
 char *_strncat(char *dest, char *src, int n);
 void *_calloc(unsigned int nmemb, unsigned int size);
