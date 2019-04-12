@@ -54,6 +54,8 @@ int main(int argc, char **argv, char **envp)
 			if (execute_on)
 				execute(command, NULL, argv);	
 			j++;
+			for (i = 0; command[i]; i++)
+				free(command[i]);
 			reset(&i, &dummy, &execute_on);
 		}
 		/* if input was piped, do not repeat the loop */
@@ -68,7 +70,6 @@ int main(int argc, char **argv, char **envp)
 			j++;
 		}
 		j = 0;
-
 		buffer = NULL;
 	}
 	free(buffer);

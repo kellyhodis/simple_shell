@@ -8,7 +8,7 @@ char *search_path(char *str)
         struct dir_s *head, *curr, *prev, *trav;
 	struct stat st;
 	int n = 50, leng;
-	char *dir_slash, *mybuf = NULL, *cat = NULL;
+	char *dir_slash, *mybuf = NULL;
 	char *forest = _getenv("PATH"); 
 
 	
@@ -17,9 +17,6 @@ char *search_path(char *str)
         head = malloc(sizeof(struct dir_s));
         if (head == NULL)
                 return (NULL);
-	mybuf = malloc(sizeof(char) * 1024); /* there is a constant to replace 1024 with */
-	if (!mybuf)
-		return (NULL);
 	mybuf = strtok(forest, ":");
 	head->dir = strdup(mybuf); 
 	prev = head;
@@ -34,6 +31,9 @@ char *search_path(char *str)
                 prev = curr;
 		mybuf = strtok(NULL, ":"); 
         }
+	trav = malloc(sizeof(struct dir_s *));
+	if (!trav)
+		return (NULL);
 	trav = head;
 	while (trav!= NULL)
 	{
@@ -49,12 +49,13 @@ char *search_path(char *str)
 		dir_slash[leng] = '/';
 		dir_slash[leng + 1] = '\0';
 		/* add dir_slash and str together on the same line */
-		cat =_strncat(dir_slash, str, n);
-		if (stat(cat, &st)== 0)
+		_strncat(dir_slash, str, n);
+		if (stat(dir_slash, &st)== 0)
 		{
-			return(cat);
+			return(dir_slash);
 		}
 		trav = trav->next;
 	}
+	free(dir_slash);
         return (NULL);
 }
