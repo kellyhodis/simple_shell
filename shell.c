@@ -1,8 +1,16 @@
 #include "holberton.h"
 
+/*
+* main - functions as a shell-like interpreter
+* @argc: argument count
+* @argv: argument vector
+* @envp: environment
+*
+* Return: 0
+*/
+
 int main(int argc, char **argv, char **envp)
 {
-
 	char *buffer = NULL, *token1;
 	char *command[15], *lines[15];
 	size_t size = 1024;
@@ -28,20 +36,14 @@ int main(int argc, char **argv, char **envp)
 			getEOF = getline(&buffer, &size, stdin);
 			if (getEOF == -1)
 				break;
-			lines[j] = "";
-			if (lines[j])
-			{
-				lines[j] = strdup(buffer); 
-				lines[j + 1] = NULL;
-			}
+			token1 = strtok(buffer, "\n");
+			lines[j] = strdup(token1); 
+			lines[j + 1] = NULL;
+
 		}
 		while(lines[j])
 		{
-			if (terminal)
-				token1 = strtok(lines[j], "\n");
-			else	
-				token1 = strtok(lines[j], "\0");
-			word_token(command, token1);
+			word_token(command, lines[j]);
 			if (check_exit(command) == -1)
 				break; 
 			execute_on = env_check(command[0], envp);		
