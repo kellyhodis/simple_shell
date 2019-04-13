@@ -10,15 +10,19 @@
 /* if function returns -1, it tells program to quit */
 void check_exit(char *command[])
 {
-	int exitcode = 0;
+	int exitcode = 0, i;
 
 	if (_strcmp(command[0], "exit") == 0)
 	{
 		if (command[1])
 		{
 			exitcode = _atoi(command[1]);
+			for (i = 0; command[i]; i++)
+				free(command[i]);
 			exit(exitcode);
 		}
+		for (i = 0; command[i]; i++)
+			free(command[i]);
 		exit(0);
 	}
 } 
