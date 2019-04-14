@@ -49,15 +49,15 @@ Custom made UNIX command line interpreter resembling UNIX shell in C.
 
 Clone repository into a new directory
 
-```
+````
 $ https://github.com/Ken-Mens/simple_shell.git
-```
+````
 Compile with following command:
 
-```` 
+````
 gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 
-```` 
+````  
 
 ## Notes
 This shell does not handle alias, comments, help, or variables.
