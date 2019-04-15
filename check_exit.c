@@ -1,5 +1,5 @@
 #include "holberton.h"
-/*
+/**
 * check_exit - checks to see if the terminal input was "exit"
 * and quits the shell if so
 * @command: array of command and arguments to the command
@@ -21,4 +21,4 @@ void check_exit(char *command[])
 		}
 		exit(exitcode);
 	}
-} 
+}
