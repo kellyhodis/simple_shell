@@ -30,18 +30,22 @@ typedef struct dir_s
 	struct dir_s *next;
 } dir_s;
 
+char *get_delim(struct dir_s *head, char *dir_slash, char *str);
+void add_new_node(struct dir_s **head, char *mybuf);
+int checks(char *command[], char **env, int *searched_path, char *buffer);
+char *line_token(char *lines[], char *term_buffer);
 void handler_c(int signo);
 char *_strtok(char *str, const char *delim);
 void free_list(dir_s *head);
 void word_token(char *command[], char *str);
 int env_check(char *command, char **env);
-void check_exit(char *command[]);
+void check_exit(char *command[], char *buffer);
 void reset(int *i, int *j, int *env_print);
-void execute(char *pathcommand, char *command[], char **envp, char **argv);
+void execute(char *command[], char **envp, char **argv);
 int piped_in(char *lines[], char *buffer);
 char *_strncat(char *dest, char *src, int n);
 void *_calloc(unsigned int nmemb, unsigned int size);
-char *search_path(char *str, char **env);
+char *search_path(char *str, char **env, int *searched_path);
 char *_getenv(const char *name, char **env);
 int _strcmp(char *s1, char *s2);
 void _env(char **environ);

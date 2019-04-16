@@ -16,7 +16,6 @@ void free_list(dir_s *head)
 	{
 		hold = head;
 		head = head->next;
-		free(hold->dir);
 		free(hold);
 	}
 	free(head);

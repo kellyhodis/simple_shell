@@ -10,6 +10,7 @@ int piped_in(char *lines[], char *buffer)
 {
 	int flag, j;
 	size_t size = 1024;
+
 	buffer = malloc(sizeof(char) * (size + 1));
 	if (!buffer)
 		return (1);
