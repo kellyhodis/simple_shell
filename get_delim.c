@@ -19,7 +19,7 @@ char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *s_p)
 	{
 		for (leng = 0; trav->dir[leng]; leng++)
 			;
-		dir_slash = malloc(sizeof(char) * (strlen(str) + leng + 2));
+		dir_slash = malloc(sizeof(char) * (_strlen(str) + leng + 2));
 		if (!dir_slash)
 			return (NULL);
 		for (leng = 0; trav->dir[leng]; leng++)
