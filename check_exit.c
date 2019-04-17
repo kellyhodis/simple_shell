@@ -18,7 +18,6 @@ void check_exit(char *command[], char *buffer, int *from_terminal)
 	{
 		if (command[1])
 			exitcode = _atoi(command[1]);
-		
 		if (*from_terminal == 1)
 			free(buffer);
 		exit(exitcode);

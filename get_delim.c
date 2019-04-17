@@ -4,9 +4,10 @@
 * @head: head of linked list.
 * @str: string.
 * @dir_slash: character pointer.
+* @s_p: flag for full command.
 * Return: Null pointer.
 */
-char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *searched_path)
+char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *s_p)
 {
 	struct dir_s *trav;
 	struct stat st;
@@ -28,12 +29,12 @@ char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *searched_pa
 		_strncat(dir_slash, str, n);
 		if (stat(dir_slash, &st) == 0)
 		{
-			*searched_path = 1;
+			*s_p = 1;
 			return (dir_slash);
 		}
 		trav = trav->next;
 		free(dir_slash);
 	}
-	*searched_path = 0;
+	*s_p = 0;
 	return (str);
 }

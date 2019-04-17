@@ -2,7 +2,6 @@
 /**
 * _getenv - looks for a particular variable in the current environment
 * @name: variable to seek
-* @env: environment variable from main
 *
 * Return: pointer to the value at this variable in env
 */

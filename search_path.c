@@ -2,7 +2,6 @@
 /**
 * search_path - searches the path for the full command
 * @str: command to find full path of
-* @env: environment variable from main
 * @searched_path: flag to indicate whether or not path was searched
 *
 * Return: pointer to the full command path

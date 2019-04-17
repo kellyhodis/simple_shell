@@ -2,18 +2,18 @@
 
 /**
 * _env - prints the current environment
-* @environ: environment variable
-*
 * Returns: nothing
 */
 
-void _env()
+void _env(void)
 {
 	int i = 0;
 
 	while (environ[i])
 	{
-		printf("%s\n", environ[i++]);
+		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
+		write(STDOUT_FILENO, "\n", 1);
+		i++;
 	}
 }
 

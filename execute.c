@@ -2,7 +2,6 @@
 /**
 * execute - forks a child process and runs the execve function inside
 * @command: array of commands
-* @env: environment variable from main
 * @argv: argument vector from main function
 *
 * Return: nothing
