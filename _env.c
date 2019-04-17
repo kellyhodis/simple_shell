@@ -1,6 +1,6 @@
-#include "holberton.h" 
+#include "holberton.h"
 
-/*
+/**
 * _env - prints the current environment
 * @environ: environment variable
 *
@@ -10,9 +10,10 @@
 void _env(char **environ)
 {
 	int i = 0;
-	while(environ[i]) 
+
+	while (environ[i])
 	{
- 		 printf("%s\n", environ[i++]); 
+		printf("%s\n", environ[i++]);
 	}
 }
 

@@ -1,22 +1,32 @@
 #include "holberton.h"
-
-char *_getenv(const char *name)
+/**
+* _getenv - looks for a particular variable in the current environment
+* @name: variable to seek
+* @env: environment variable from main
+*
+* Return: pointer to the value at this variable in env
+*/
+char *_getenv(const char *name, char **env)
 {
-		extern char **environ;
-		char *tempo;
-		char *token = NULL;
-		int index = 0; 
+	char *tempo;
+	char *tempo_start;
+	char *token = NULL;
+	char *match;
+	int index = 0;
 
-		for (; environ[index]!= NULL; index++)
+	for (; env[index] != NULL; index++)
+	{
+		tempo = strdup(env[index]);
+		tempo_start = tempo;
+		token = strtok(tempo, "=");
+
+		if (strcmp(token, name) == 0)
 		{
-			tempo = strdup(environ[index]);
-			token = strtok(tempo, "=");
-		
-			if (strcmp(token, name) == 0)
-			{
-				return (strtok(NULL, "\n"));
-			}
-		
+			match = strdup(strtok(NULL, "\n"));
+			free(tempo_start);
+			return (match);
 		}
-	return (0);
+		free(tempo_start);
+	}
+	return (NULL);
 }

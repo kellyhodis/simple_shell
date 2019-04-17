@@ -1,4 +1,12 @@
 #include "holberton.h"
+/**
+* execute - forks a child process and runs the execve function inside
+* @command: array of commands
+* @env: environment variable from main
+* @argv: argument vector from main function
+*
+* Return: nothing
+*/
 
 void execute(char *command[], char **env, char **argv)
 {

@@ -1,77 +1,51 @@
 #include "holberton.h"
-
-/*
-* main - functions as a shell-like interpreter
+/**
+* main - act as interpreter & shell clone
 * @argc: argument count
 * @argv: argument vector
-* @envp: environment
+* @envp: environment variable
 *
 * Return: 0
 */
 
 int main(int argc, char **argv, char **envp)
 {
-	char *buffer = NULL, *oneline;
-	char *command[15], *lines[15];
-	size_t size = 1024;
-	int i = 0, getEOF = 0, j = 0, dummy = 0;
-	int on = 1, terminal = 1, execute_on = 1;
-	struct stat st;
+	char *piped_buffer = NULL, *term_buffer = NULL;
+	char *lines[15], *command[15];
+	/* defaults */
+	int terminal = 1, j = 0, i = 0, execute_on = 1;
+	int on = 1, searched_path = 0;
+
 	(void)argc;
-	/* allocate memory for buffer */
-	buffer = _calloc(1, size);
-	if (buffer == NULL)
-		return ('\0');
-
-
-	/* check if input is piped or from terminal */
+	signal(SIGINT, handler_c);
 	if (!(isatty(fileno(stdin))))
-		terminal = piped_in(lines, buffer);
-	
-	/* prompt */
+		terminal = piped_in(lines, piped_buffer);
 	write(STDOUT_FILENO, "#cisfun$ ", 9);
-	
 	while (on)
 	{
 		if (terminal)
-		{
-			getEOF = getline(&buffer, &size, stdin);
-			if (getEOF == -1)
-				break;
-			oneline = strtok(buffer, "\n");
-			lines[j] = malloc(sizeof(char *));
-			lines[j] = strdup(oneline); 
-			lines[j + 1] = NULL;
-
-		}
-		while(lines[j])
+			term_buffer = line_token(lines, term_buffer);
+		for (j = 0; lines[j]; j++)
 		{
 			word_token(command, lines[j]);
-			check_exit(command);
-			execute_on = env_check(command[0], envp);		
-			if (stat(command[0], &st)!= 0)
-				command[0] = search_path(command[0]);
+			execute_on = checks(command, envp, &searched_path, term_buffer);
 			if (execute_on)
-				execute(command, NULL, argv);	
-			j++;
-			for (i = 0; command[i]; i++)
-				free(command[i]);
-			reset(&i, &dummy, &execute_on);
+				execute(command, NULL, argv);
+			else
+				execute_on = 1;
+			if (searched_path == 1)
+				free(command[0]);
+			searched_path = 0;
 		}
-		/* if input was piped, do not repeat the loop */
-		if (!terminal)
-			on = 0;
+		if (terminal)
+			free(term_buffer);
 		write(STDOUT_FILENO, "#cisfun$ ", 9);
-/*		free_array_of_str(command);*/
 		reset(&i, &j, &execute_on);
-		while (lines[j])
+		if (!terminal)
 		{
-			free(lines[j]);
-			j++;
+			on = 0;
+			free(piped_buffer);
 		}
-		j = 0;
-		buffer = NULL;
 	}
-	free(buffer);
-	return (0);	
+	return (0);
 }

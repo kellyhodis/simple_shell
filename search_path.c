@@ -1,61 +1,28 @@
 #include "holberton.h"
-
-/* linked list of directories */
-
-char *search_path(char *str)
+/**
+* search_path - searches the path for the full command
+* @str: command to find full path of
+* @env: environment variable from main
+* @searched_path: flag to indicate whether or not path was searched
+*
+* Return: pointer to the full command path
+*/
+char *search_path(char *str, char **env, int *searched_path)
 {
-/* struct to be manipulated through linked list */
-        struct dir_s *head, *curr, *prev, *trav;
-	struct stat st;
-	int n = 50, leng;
-	char *dir_slash, *mybuf = NULL;
-	char *forest = _getenv("PATH"); 
+	struct dir_s *head;
+	char *dir_slash = NULL, *mybuf = NULL, *forest = _getenv("PATH", env);
 
-	
-
-	/*allocated space for node type directory and tokenized */
-        head = malloc(sizeof(struct dir_s));
-        if (head == NULL)
-                return (NULL);
+	head = NULL;
 	mybuf = strtok(forest, ":");
-	head->dir = strdup(mybuf); 
-	prev = head;
 
-        while (mybuf)
-        {
-		curr = malloc(sizeof(struct dir_s));
-                if (curr == NULL)
-			return (NULL);
-		curr->dir = strdup(mybuf);
-		prev->next = curr;
-                prev = curr;
-		mybuf = strtok(NULL, ":"); 
-        }
-	trav = malloc(sizeof(struct dir_s *));
-	if (!trav)
-		return (NULL);
-	trav = head;
-	while (trav!= NULL)
+	while (mybuf)
 	{
-		for(leng = 0;trav->dir[leng]; leng++)
-    			; 
-		dir_slash = malloc(sizeof(char) * (strlen(str) + leng + 2));
-		if (!dir_slash)
-			return (NULL);
-		/* copy each character of trav->dir into dir_slash */ 
-		for(leng = 0; trav->dir[leng]; leng++)
-			dir_slash[leng] = trav->dir[leng];
-		/* add the forward slash / character followed by null byte */
-		dir_slash[leng] = '/';
-		dir_slash[leng + 1] = '\0';
-		/* add dir_slash and str together on the same line */
-		_strncat(dir_slash, str, n);
-		if (stat(dir_slash, &st)== 0)
-		{
-			return(dir_slash);
-		}
-		trav = trav->next;
+		add_new_node(&head, mybuf);
+		mybuf = strtok(NULL, ":");
 	}
-	free(dir_slash);
-        return (NULL);
+	dir_slash = get_delim(head, dir_slash, str);
+	*searched_path = 1;
+	free(forest);
+	free_list(head);
+	return (dir_slash);
 }
