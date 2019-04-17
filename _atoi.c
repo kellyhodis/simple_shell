@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "holberton.h"
 /**
  * _atoi - function that will convert str input into integers
  * @str: string to be inputted
