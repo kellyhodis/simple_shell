@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	if (!(isatty(fileno(stdin))))
 		terminal = piped_in(lines, piped_buffer);
 	else
-		write(STDOUT_FILENO, "$", 1);
+		write(STDOUT_FILENO, "$ ", 2);
 	while (on)
 	{
 		if (terminal)
@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 		}
 		if (terminal)
 		{
-			write(STDOUT_FILENO, "$", 1);
+			write(STDOUT_FILENO, "$ ", 2);
 		}
 		reset(&i, &j, &execute_on);
 		if (!terminal)
