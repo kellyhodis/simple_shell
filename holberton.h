@@ -35,7 +35,7 @@ int _strlen(char *s);
 char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *s_p);
 void add_new_node(struct dir_s **head, char *mybuf);
 int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av);
-char *line_token(char *lines[], char *term_buffer);
+void line_token(char *lines[], char *term_buffer);
 char *_strtok(char *str, const char *delim);
 void free_list(dir_s *head);
 void word_token(char *command[], char *str);

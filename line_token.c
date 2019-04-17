@@ -8,17 +8,20 @@
 * Return: nothing
 */
 
-char *line_token(char *lines[], char *term_buffer)
+void line_token(char *lines[], char *term_buffer)
 {
 	int getEOF = 0, j = 0;
-	size_t size = 0;
+	size_t size = 1024;
 
-	getEOF = getline(&term_buffer, &size, stdin);
+	getEOF = read(STDIN_FILENO, term_buffer, size);
+	if (getEOF == 0)
+		exit(0);
 	if (getEOF == -1)
-		return (NULL);
+	{
+		lines[j] = NULL;
+		return;
+	}
 	lines[j] = strtok(term_buffer, "\n");
 	if (lines[j])
 		lines[j + 1] = NULL;
-	return (term_buffer);
 }
-

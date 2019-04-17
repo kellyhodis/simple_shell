@@ -9,7 +9,7 @@
 
 int main(int argc, char **argv)
 {
-	char piped_buffer[1024], *term_buffer = NULL;
+	char piped_buffer[1024], term_buffer[1024];
 	char *lines[15], *command[15];
 	int terminal = 1, j = 0, i = 0, execute_on = 1, on = 1, s_p = 0, ln = 0;
 	(void)argc;
@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	while (on)
 	{
 		if (terminal)
-			term_buffer = line_token(lines, term_buffer);
+			line_token(lines, term_buffer);
 		for (j = 0; lines[j]; j++)
 		{
 			ln++;
@@ -41,7 +41,6 @@ int main(int argc, char **argv)
 		}
 		if (terminal)
 		{
-			free(term_buffer);
 			write(STDOUT_FILENO, "#cisfun$ ", 9);
 		}
 		reset(&i, &j, &execute_on);
