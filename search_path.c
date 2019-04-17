@@ -7,10 +7,10 @@
 *
 * Return: pointer to the full command path
 */
-char *search_path(char *str, char **env, int *searched_path)
+char *search_path(char *str, int *searched_path)
 {
 	struct dir_s *head;
-	char *dir_slash = NULL, *mybuf = NULL, *forest = _getenv("PATH", env);
+	char *dir_slash = NULL, *mybuf = NULL, *forest = _getenv("PATH");
 
 	head = NULL;
 	mybuf = strtok(forest, ":");

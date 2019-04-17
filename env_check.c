@@ -7,11 +7,11 @@
 * Return: 1
 */
 
-int env_check(char *command, char **env)
+int env_check(char *command)
 {
 	if (_strcmp(command, "env") == 0)
 	{
-		_env(env);
+		_env();
 		return (0);
 	}
 	return (1);

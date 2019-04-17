@@ -6,7 +6,7 @@
 *
 * Return: pointer to the value at this variable in env
 */
-char *_getenv(const char *name, char **env)
+char *_getenv(const char *name)
 {
 	char *tempo;
 	char *tempo_start;
@@ -14,9 +14,9 @@ char *_getenv(const char *name, char **env)
 	char *match;
 	int index = 0;
 
-	for (; env[index] != NULL; index++)
+	for (; environ[index] != NULL; index++)
 	{
-		tempo = strdup(env[index]);
+		tempo = strdup(environ[index]);
 		tempo_start = tempo;
 		token = strtok(tempo, "=");
 

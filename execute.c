@@ -8,7 +8,7 @@
 * Return: nothing
 */
 
-void execute(char *command[], char **env, char **argv)
+void execute(char *command[], char **argv)
 {
 	pid_t child_pid;
 	int status;
@@ -16,7 +16,7 @@ void execute(char *command[], char **env, char **argv)
 	child_pid = fork();
 	if (child_pid == 0)
 	{
-		execve(command[0], command, env);
+		execve(command[0], command, environ);
 		perror(argv[0]);
 		exit(0);
 	}

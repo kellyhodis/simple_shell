@@ -7,7 +7,7 @@
 * Returns: nothing
 */
 
-void _env(char **environ)
+void _env()
 {
 	int i = 0;
 
