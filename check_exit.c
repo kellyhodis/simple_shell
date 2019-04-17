@@ -13,13 +13,12 @@
 void check_exit(char *command[], char *buffer, int *from_terminal)
 {
 	int exitcode = 0;
-
+	(void)buffer;
+	(void)from_terminal;
 	if (_strcmp(command[0], "exit") == 0)
 	{
 		if (command[1])
 			exitcode = _atoi(command[1]);
-		if (*from_terminal == 1)
-			free(buffer);
 		exit(exitcode);
 	}
 }

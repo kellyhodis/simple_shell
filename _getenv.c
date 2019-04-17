@@ -11,17 +11,28 @@ char *_getenv(const char *name)
 	char *tempo_start;
 	char *token = NULL;
 	char *match;
-	int index = 0;
+	int index = 0, k;
 
 	for (; environ[index] != NULL; index++)
 	{
-		tempo = strdup(environ[index]);
+		tempo = malloc(_strlen(environ[index]) + 1);
+		if (tempo == NULL)
+			return (NULL);
+		for (k = 0; environ[index][k]; k++)
+			tempo[k] = environ[index][k];
+		tempo[k] = '\0';
 		tempo_start = tempo;
 		token = strtok(tempo, "=");
 
-		if (strcmp(token, name) == 0)
+		if (_strcmp(token, name) == 0)
 		{
-			match = strdup(strtok(NULL, "\n"));
+			token = strtok(NULL, "\n");
+			match = malloc(_strlen(token) + 1);
+			if (match == NULL)
+				return (NULL);
+			for (k = 0; token[k]; k++)
+				match[k] = token[k];
+			match[k] = '\0';
 			free(tempo_start);
 			return (match);
 		}

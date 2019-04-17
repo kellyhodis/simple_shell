@@ -5,7 +5,7 @@
  * @s2: second string to be compared with
  * Return: Always 0.
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	int i = 0;
 

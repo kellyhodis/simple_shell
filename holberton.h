@@ -48,7 +48,7 @@ char *_strncat(char *dest, char *src, int n);
 void *_calloc(unsigned int nmemb, unsigned int size);
 char *search_path(char *str, int *searched_path);
 char *_getenv(const char *name);
-int _strcmp(char *s1, char *s2);
+int _strcmp(const char *s1, const char *s2);
 void _env(void);
 int _atoi(char *str);
 int _setenv(const char *name, const char *value, int overwrite);
