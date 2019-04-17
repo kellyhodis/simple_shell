@@ -20,8 +20,7 @@ char *search_path(char *str, int *searched_path)
 		add_new_node(&head, mybuf);
 		mybuf = strtok(NULL, ":");
 	}
-	dir_slash = get_delim(head, dir_slash, str);
-	*searched_path = 1;
+	dir_slash = get_delim(head, dir_slash, str, searched_path);
 	free(forest);
 	free_list(head);
 	return (dir_slash);

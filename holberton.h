@@ -31,10 +31,10 @@ typedef struct dir_s
 	char *dir;
 	struct dir_s *next;
 } dir_s;
-
-char *get_delim(struct dir_s *head, char *dir_slash, char *str);
+int _strlen(char *s);  
+char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *searched_path);
 void add_new_node(struct dir_s **head, char *mybuf);
-int checks(char *command[], int *searched_path, char *buffer, int *from_terminal);
+int checks(char *command[], int *searched_path, char *buffer, int *from_terminal,int *ln, char **argv);
 char *line_token(char *lines[], char *term_buffer);
 void handler_c(int signo);
 char *_strtok(char *str, const char *delim);
@@ -53,5 +53,5 @@ int _strcmp(char *s1, char *s2);
 void _env(void);
 int _atoi(char *str);
 int _setenv(const char *name, const char *value, int overwrite);
-
+char * _itoa(int num);
 #endif /* HOLBERTON_H */

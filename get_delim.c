@@ -6,7 +6,7 @@
 * @dir_slash: character pointer.
 * Return: Null pointer.
 */
-char *get_delim(struct dir_s *head, char *dir_slash, char *str)
+char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *searched_path)
 {
 	struct dir_s *trav;
 	struct stat st;
@@ -27,9 +27,13 @@ char *get_delim(struct dir_s *head, char *dir_slash, char *str)
 		dir_slash[leng + 1] = '\0';
 		_strncat(dir_slash, str, n);
 		if (stat(dir_slash, &st) == 0)
+		{
+			*searched_path = 1;
 			return (dir_slash);
+		}
 		trav = trav->next;
 		free(dir_slash);
 	}
-	return (NULL);
+	*searched_path = 0;
+	return (str);
 }

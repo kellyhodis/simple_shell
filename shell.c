@@ -15,8 +15,9 @@ int main(int argc, char **argv)
 	/* defaults */
 	int terminal = 1, j = 0, i = 0, execute_on = 1;
 	int on = 1, searched_path = 0;
-
+	int ln = 0;
 	(void)argc;
+
 	signal(SIGINT, handler_c);
 	if (!(isatty(fileno(stdin))))
 		terminal = piped_in(lines, piped_buffer);
@@ -27,11 +28,12 @@ int main(int argc, char **argv)
 			term_buffer = line_token(lines, term_buffer);
 		for (j = 0; lines[j]; j++)
 		{
+			ln++;
 			word_token(command, lines[j]);
 			if (terminal)
-				execute_on = checks(command, &searched_path, term_buffer, &terminal);
+				execute_on = checks(command, &searched_path, term_buffer, &terminal, &ln, argv);
 			else
-				execute_on = checks(command, &searched_path, piped_buffer, &terminal);
+				execute_on = checks(command, &searched_path, piped_buffer, &terminal, &ln, argv);
 			if (execute_on)
 				execute(command, argv);
 			else
