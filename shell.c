@@ -38,6 +38,8 @@ int main(int argc, char **argv)
 			if (s_p == 1)
 				free(command[0]);
 			s_p = 0;
+			for (j = 0; j <= 1024; j++)
+				term_buffer[j] = 0;
 		}
 		if (terminal)
 		{

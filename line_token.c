@@ -21,6 +21,7 @@ void line_token(char *lines[], char *term_buffer)
 		lines[j] = NULL;
 		return;
 	}
+	term_buffer[getEOF] = '\0';
 	lines[j] = strtok(term_buffer, "\n");
 	if (lines[j])
 		lines[j + 1] = NULL;
