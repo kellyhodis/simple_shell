@@ -11,14 +11,14 @@ int main(int argc, char **argv)
 {
 	char piped_buffer[1024], *term_buffer = NULL;
 	char *lines[15], *command[15];
-	/* defaults */
 	int terminal = 1, j = 0, i = 0, execute_on = 1, on = 1, s_p = 0, ln = 0;
 	(void)argc;
 
 	signal(SIGINT, SIG_IGN);
 	if (!(isatty(fileno(stdin))))
 		terminal = piped_in(lines, piped_buffer);
-	write(STDOUT_FILENO, "#cisfun$ ", 9);
+	else
+		write(STDOUT_FILENO, "#cisfun$ ", 9);
 	while (on)
 	{
 		if (terminal)
@@ -35,13 +35,15 @@ int main(int argc, char **argv)
 				execute(command, argv);
 			else
 				execute_on = 1;
-			if (searched_path == 1)
+			if (s_p == 1)
 				free(command[0]);
-			searched_path = 0;
+			s_p = 0;
 		}
 		if (terminal)
+		{
 			free(term_buffer);
-		write(STDOUT_FILENO, "#cisfun$ ", 9);
+			write(STDOUT_FILENO, "#cisfun$ ", 9);
+		}
 		reset(&i, &j, &execute_on);
 		if (!terminal)
 			on = 0;
