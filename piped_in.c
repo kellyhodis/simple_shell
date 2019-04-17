@@ -8,14 +8,11 @@
 */
 int piped_in(char *lines[], char *buffer)
 {
-	int flag, j;
+	int flag, j, read_bytes = 0;
 	size_t size = 1024;
 
-	buffer = malloc(sizeof(char) * (size + 1));
-	if (!buffer)
-		return (1);
-	read(STDIN_FILENO, buffer, size);
-	printf("buffer: %s\n", buffer);
+	read_bytes = read(STDIN_FILENO, buffer, size);
+	buffer[read_bytes] = '\0';
 	j = 0;
 	flag = 0;
 	lines[j] = strtok(buffer, "\n");
@@ -25,7 +22,5 @@ int piped_in(char *lines[], char *buffer)
 		j++;
 		lines[j] = strtok(NULL, "\n");
 	}
-	for (j = 0; lines[j]; j++)
-		printf("%s\n", lines[j]);
 	return (flag);
 }

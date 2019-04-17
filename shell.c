@@ -8,9 +8,9 @@
 * Return: 0
 */
 
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv)
 {
-	char *piped_buffer = NULL, *term_buffer = NULL;
+	char piped_buffer[1024], *term_buffer = NULL;
 	char *lines[15], *command[15];
 	/* defaults */
 	int terminal = 1, j = 0, i = 0, execute_on = 1;
@@ -28,9 +28,12 @@ int main(int argc, char **argv, char **envp)
 		for (j = 0; lines[j]; j++)
 		{
 			word_token(command, lines[j]);
-			execute_on = checks(command, envp, &searched_path, term_buffer);
+			if (terminal)
+				execute_on = checks(command, &searched_path, term_buffer, &terminal);
+			else
+				execute_on = checks(command, &searched_path, piped_buffer, &terminal);
 			if (execute_on)
-				execute(command, NULL, argv);
+				execute(command, argv);
 			else
 				execute_on = 1;
 			if (searched_path == 1)
@@ -44,7 +47,6 @@ int main(int argc, char **argv, char **envp)
 		if (!terminal)
 		{
 			on = 0;
-			free(piped_buffer);
 		}
 	}
 	return (0);

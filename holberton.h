@@ -15,6 +15,8 @@
 #include <errno.h>
 #include <unistd.h>
 
+extern char **environ;
+
 /**
 * struct dir_s - singly linked list
 * @dir: malloc'd string that holds directory
@@ -32,23 +34,23 @@ typedef struct dir_s
 
 char *get_delim(struct dir_s *head, char *dir_slash, char *str);
 void add_new_node(struct dir_s **head, char *mybuf);
-int checks(char *command[], char **env, int *searched_path, char *buffer);
+int checks(char *command[], int *searched_path, char *buffer, int *from_terminal);
 char *line_token(char *lines[], char *term_buffer);
 void handler_c(int signo);
 char *_strtok(char *str, const char *delim);
 void free_list(dir_s *head);
 void word_token(char *command[], char *str);
-int env_check(char *command, char **env);
-void check_exit(char *command[], char *buffer);
+int env_check(char *command);
+void check_exit(char *command[], char *buffer, int *from_terminal);
 void reset(int *i, int *j, int *env_print);
-void execute(char *command[], char **envp, char **argv);
+void execute(char *command[], char **argv);
 int piped_in(char *lines[], char *buffer);
 char *_strncat(char *dest, char *src, int n);
 void *_calloc(unsigned int nmemb, unsigned int size);
-char *search_path(char *str, char **env, int *searched_path);
-char *_getenv(const char *name, char **env);
+char *search_path(char *str, int *searched_path);
+char *_getenv(const char *name);
 int _strcmp(char *s1, char *s2);
-void _env(char **environ);
+void _env(void);
 int _atoi(char *str);
 int _setenv(const char *name, const char *value, int overwrite);
 
