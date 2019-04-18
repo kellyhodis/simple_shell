@@ -14,7 +14,7 @@
 #include <sys/resource.h>
 #include <errno.h>
 #include <unistd.h>
-
+extern int errno;
 extern char **environ;
 
 /**

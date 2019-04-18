@@ -29,6 +29,11 @@ int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av)
 	if (stat(command[0], &st) != 0)
 	{
 		command[0] = search_path(command[0], s_p);
+
+		if (stat(command[0], &st) != 0)
+		{
+			errno = 127;
+		}
 	}
 	return (execute_on);
 }
