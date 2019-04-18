@@ -12,6 +12,8 @@ char *search_path(char *str, int *searched_path)
 	char *dir_slash = NULL, *mybuf = NULL, *forest = _getenv("PATH");
 
 	head = NULL;
+	if (forest[0] == ':')
+		add_new_node(&head, "");
 	mybuf = strtok(forest, ":");
 
 	while (mybuf)
