@@ -14,6 +14,9 @@ Custom made command line interpreter that reads and executes commands from user 
 .SH USER INPUT
 A shell prompt "$cisfun" will be ready to receive commands. Our shell will mirror what Ken Thompson's Unix shell does by splitting the commands into arrays, look for built ins and expanding variables, and finally executing said commands.
 
+.SH INVOCATION
+When logging in to shell
+
 .SH BUILT-IN COMMANDS
 
 .B exit [exitstatus]

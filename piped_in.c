@@ -12,6 +12,10 @@ int piped_in(char *lines[], char *buffer)
 	size_t size = 1024;
 
 	read_bytes = read(STDIN_FILENO, buffer, size);
+	if (read_bytes == -1)
+		exit(EXIT_FAILURE);
+	if (read_bytes == 0)
+		exit(EXIT_SUCCESS);
 	buffer[read_bytes] = '\0';
 	j = 0;
 	flag = 0;

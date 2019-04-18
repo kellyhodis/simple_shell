@@ -19,7 +19,7 @@ char *_itoa(int num)
 		tens *= 10;
 	num_string = malloc(digit + 1);
 	if (num_string == NULL)
-		return (NULL);
+		exit(EXIT_FAILURE);
 
 	while (i < digit)
 	{
