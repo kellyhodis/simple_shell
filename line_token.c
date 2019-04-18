@@ -18,8 +18,7 @@ void line_token(char *lines[], char *term_buffer)
 		exit(0);
 	if (getEOF == -1)
 	{
-		lines[j] = NULL;
-		return;
+		exit(EXIT_FAILURE);
 	}
 	term_buffer[getEOF] = '\0';
 	lines[j] = strtok(term_buffer, "\n");
