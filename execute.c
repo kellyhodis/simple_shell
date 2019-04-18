@@ -22,7 +22,7 @@ void execute(char *command[], char **argv)
 	{
 		execve(command[0], command, environ);
 		perror(argv[0]);
-		exit(0);
+		exit(errno);
 	}
 
 	waitpid(child_pid, &status, 0);
