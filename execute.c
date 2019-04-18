@@ -13,6 +13,7 @@ void execute(char *command[], char **argv)
 	int status;
 
 	child_pid = fork();
+
 	if (child_pid == 0)
 	{
 		execve(command[0], command, environ);
