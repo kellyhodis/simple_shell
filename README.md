@@ -63,4 +63,4 @@ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
 This shell does not handle alias, comments, help, or variables.
 
 ## Known Bugs
-Currently have some memory leakage.
+Currently no known bugs.
