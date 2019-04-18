@@ -17,7 +17,7 @@ char *_getenv(const char *name)
 	{
 		tempo = malloc(_strlen(environ[index]) + 1);
 		if (tempo == NULL)
-			return (NULL);
+			exit(EXIT_FAILURE);
 		for (k = 0; environ[index][k]; k++)
 			tempo[k] = environ[index][k];
 		tempo[k] = '\0';
@@ -29,7 +29,7 @@ char *_getenv(const char *name)
 			token = strtok(NULL, "\n");
 			match = malloc(_strlen(token) + 1);
 			if (match == NULL)
-				return (NULL);
+				exit(EXIT_FAILURE);
 			for (k = 0; token[k]; k++)
 				match[k] = token[k];
 			match[k] = '\0';
