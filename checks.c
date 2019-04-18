@@ -21,6 +21,11 @@ int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av)
 	(void)ln;
 	check_exit(command, buf, f_t);
 	execute_on = env_check(command);
+	if (command[0][0] == '\0')
+	{
+		execute_on = 0;
+		return (execute_on);
+	}
 	if (stat(command[0], &st) != 0)
 	{
 		command[0] = search_path(command[0], s_p);

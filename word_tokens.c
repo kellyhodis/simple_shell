@@ -13,6 +13,12 @@ void word_token(char *command[], char *str)
 	char *word = NULL;
 
 	word = strtok(str, " ");
+	if (word == NULL)
+	{
+		command[i] = "";
+		command[i + 1] = NULL;
+		return;
+	}
 	while (word)
 	{
 		command[i] = word;
