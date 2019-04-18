@@ -6,9 +6,9 @@
 * Return: 1
 */
 
-int env_check(char *command)
+int env_check(char *command[])
 {
-	if (_strcmp(command, "env") == 0)
+	if ((_strcmp(command[0], "env") == 0) && command[1] == NULL)
 	{
 		_env();
 		return (0);

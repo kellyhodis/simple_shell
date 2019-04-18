@@ -39,7 +39,7 @@ void line_token(char *lines[], char *term_buffer);
 char *_strtok(char *str, const char *delim);
 void free_list(dir_s *head);
 void word_token(char *command[], char *str);
-int env_check(char *command);
+int env_check(char *command[]);
 void check_exit(char *command[], char *buffer, int *from_terminal);
 void reset(int *i, int *j, int *env_print);
 void execute(char *command[], char **argv);

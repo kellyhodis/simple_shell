@@ -16,14 +16,20 @@ int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av)
 	struct stat st;
 	char *count;
 
+<<<<<<< HEAD
 	(void)av;
 	(void)count;
+=======
+	(void)count;
+	(void)av;
+>>>>>>> aa1b74d6329227679aee35f7fd4e2b51bcc5208b
 	(void)ln;
 	check_exit(command, buf, f_t);
 	execute_on = env_check(command);
 	if (stat(command[0], &st) != 0)
 	{
 		command[0] = search_path(command[0], s_p);
+<<<<<<< HEAD
 /*		if (stat(command[0], &st) != 0)
 		{
 			count = _itoa(*ln);
@@ -37,5 +43,8 @@ int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av)
 			free(count);
 		}
 */	}
+=======
+	}
+>>>>>>> aa1b74d6329227679aee35f7fd4e2b51bcc5208b
 	return (execute_on);
 }
