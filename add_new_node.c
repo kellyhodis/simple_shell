@@ -14,7 +14,7 @@ void add_new_node(struct dir_s **head, char *mybuf)
 
 	new = malloc(sizeof(struct dir_s));
 	if (!new)
-		return;
+		exit(EXIT_FAILURE);
 	new->dir = mybuf;
 	new->next = *head;
 	*head = new;
