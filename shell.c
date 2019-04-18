@@ -39,9 +39,8 @@ int main(int argc, char **argv)
 				free(command[0]);
 			s_p = 0;
 		}
-/*		for (j = 0; j <= 1024; j++)
+		for (j = 0; j <= 1024; j++)
 			term_buffer[j] = 0;
-*/		term_buffer[0] = '\0';
 		if (terminal)
 			write(STDOUT_FILENO, "$ ", 2);
 		reset(&i, &j, &execute_on);
