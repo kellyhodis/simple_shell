@@ -31,7 +31,13 @@ typedef struct dir_s
 	char *dir;
 	struct dir_s *next;
 } dir_s;
-int _strlen(char *s);
+
+int new_env(const char *name, const char *value);
+char *_strcpy(char *dest, const char *src);
+int echo_check(char *command[]);
+int _setenv(const char *name, const char *value, int overwrite);
+int cd_check(char *command[]);
+int _strlen(const char *s);
 char *get_delim(struct dir_s *head, char *dir_slash, char *str, int *s_p);
 void add_new_node(struct dir_s **head, char *mybuf);
 int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av);
@@ -44,7 +50,7 @@ void check_exit(char *command[], char *buffer, int *from_terminal);
 void reset(int *i, int *j, int *env_print);
 void execute(char *command[], char **argv);
 int piped_in(char *lines[], char *buffer);
-char *_strncat(char *dest, char *src, int n);
+char *_strncat(char *dest, const char *src, int n);
 void *_calloc(unsigned int nmemb, unsigned int size);
 char *search_path(char *str, int *searched_path);
 char *_getenv(const char *name);

@@ -20,7 +20,11 @@ int checks(char *command[], int *s_p, char *buf, int *f_t, int *ln, char **av)
 	(void)av;
 	(void)ln;
 	check_exit(command, buf, f_t);
-	execute_on = env_check(command);
+	execute_on = cd_check(command);
+	if (execute_on != 0)
+		execute_on = echo_check(command);
+	if (execute_on != 0)
+		execute_on = env_check(command);
 	if (command[0][0] == '\0')
 	{
 		execute_on = 0;

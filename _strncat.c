@@ -6,7 +6,7 @@
  * @n: number of bytes that will be appended
  * Return: concatentated string
  */
-char *_strncat(char *dest, char *src, int n)
+char *_strncat(char *dest, const char *src, int n)
 {
 	int x;
 	char *temp;
