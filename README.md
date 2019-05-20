@@ -7,6 +7,8 @@
 ### Description ###
 Custom made UNIX command line interpreter resembling UNIX shell in C.
 
+![C logo](https://seeklogo.com/images/C/c-programming-language-logo-9B32D017B1-seeklogo.com.png)
+
 ## Features
 * Implement the `setenv` and `unsetenv` builtin commands
 * Handle the `exit` builtin
